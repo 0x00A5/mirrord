@@ -1,0 +1,5 @@
+[book]
+authors = ["Yuan Lyu"]
+language = "en"
+src = "src"
+title = "mirrord book"
