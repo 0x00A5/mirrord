@@ -176,7 +176,44 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="chapter-1"><a class="header" href="#chapter-1">Chapter 1</a></h1>
+                        <h2 id="purpose-of-this-book"><a class="header" href="#purpose-of-this-book">Purpose of this book</a></h2>
+<p>This book is written for engineers working on <code>mirrord</code>. Its goal is to make the project’s design,
+architecture, and implementation easier to understand and reason about.</p>
+<p>Note: This book is still a work in progress.</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="what-is-mirrord"><a class="header" href="#what-is-mirrord">What is <code>mirrord</code>?</a></h2>
+<p><code>mirrord</code> is a tool that allows developers to run local processes in the context of their k8s cloud
+environment. By skipping the process of CI, building image and deployment, it makes testing
+much easier.</p>
+<h2 id="how-is-it-different-from-other-solutions"><a class="header" href="#how-is-it-different-from-other-solutions">How is it different from other solutions?</a></h2>
+<p>Unlike other solutions that connect users' local machine to their cluster, <code>mirrord</code> runs at
+the local process level by intercepting its syscalls and proxying them to the cloud environment.
+In the k8s cluster, <code>mirrord</code> runs an agent at the level of the target pod. running on the same
+k8s node and executing the syscalls received from users' local process.</p>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="a-1000-foot-view"><a class="header" href="#a-1000-foot-view">A 1000-foot view</a></h2>
+<pre class="mermaid">graph LR
+    subgraph Local[&quot;💻 Local Machine&quot;]
+        direction TB
+        subgraph Process1[&quot;Local Process&quot;]
+            Layer1[Layer]
+        end
+        subgraph Process2[&quot;Local Process&quot;]
+            Layer2[Layer]
+        end
+        IntProxy[Internal Proxy]
+    end
+
+    subgraph Cluster[&quot;☸️ Kubernetes Cluster&quot;]
+        direction TB
+        subgraph TargetNS[&quot;Target Namespace&quot;]
+            Agent[Agent]
+            Target[Target Pod]
+        end
+    end
+
+    Layer1&lt;--&gt;IntProxy
+    Layer2&lt;--&gt;IntProxy
+    IntProxy&lt;--&gt;Agent
+</pre>
 
                     </main>
 
@@ -212,6 +249,8 @@
         <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="mermaid.min.js"></script>
+        <script src="mermaid-init.js"></script>
 
         <script>
         window.addEventListener('load', function() {
