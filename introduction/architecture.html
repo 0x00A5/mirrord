@@ -176,14 +176,14 @@
                 <div id="content" class="content">
                     <main>
                         <h2 id="a-1000-foot-view"><a class="header" href="#a-1000-foot-view">A 1000-foot view</a></h2>
+<p>Depending on how mirrord deploys and connects to its agent running in the cloud, the overall
+architecture and the components involved may vary.</p>
+<h3 id="direct-kubernetes-port-forwarding"><a class="header" href="#direct-kubernetes-port-forwarding">Direct Kubernetes Port Forwarding</a></h3>
 <pre class="mermaid">graph LR
     subgraph Local[&quot;💻 Local Machine&quot;]
         direction TB
-        subgraph Process1[&quot;Local Process&quot;]
-            Layer1[Layer]
-        end
-        subgraph Process2[&quot;Local Process&quot;]
-            Layer2[Layer]
+        subgraph Process[&quot;Local Process&quot;]
+            Layer[Layer]
         end
         IntProxy[Internal Proxy]
     end
@@ -196,10 +196,11 @@
         end
     end
 
-    Layer1&lt;--&gt;IntProxy
-    Layer2&lt;--&gt;IntProxy
+    Layer&lt;--&gt;IntProxy
     IntProxy&lt;--&gt;Agent
 </pre>
+<h3 id="external-proxy"><a class="header" href="#external-proxy">External Proxy</a></h3>
+<h3 id="mirrord-operator"><a class="header" href="#mirrord-operator"><code>mirrord</code> Operator</a></h3>
 
                     </main>
 
