@@ -3,7 +3,7 @@
 Depending on how mirrord deploys and connects to its agent running in the cloud, the overall 
 architecture and the components involved may vary. 
 
-### Direct Kubernetes Port Forwarding
+### Direct Kubernetes
 
 ```mermaid
 graph LR
